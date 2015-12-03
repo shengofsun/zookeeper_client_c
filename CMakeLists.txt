@@ -16,6 +16,7 @@ set(src_generated "generated/zookeeper.jute.c")
 
 ADD_DEFINITIONS(-DTHREADED)
 ADD_DEFINITIONS(-D_GNU_SOURCE)
+ADD_DEFINITIONS(-fPIC)
 
 INCLUDE_DIRECTORIES("include")
 ADD_LIBRARY(zookeeper_mt STATIC ${src} ${src_generated})
