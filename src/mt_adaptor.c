@@ -42,6 +42,8 @@
 #include <poll.h>
 #include <unistd.h>
 #include <sys/time.h>
+#else
+#include <Windows.h>
 #endif
 
 void zoo_lock_auth(zhandle_t *zh)
@@ -491,17 +493,12 @@ int32_t fetch_and_add(volatile int32_t* operand, int incr)
          : "memory");
    return result;
 #else
-    volatile int32_t result;
-    _asm
-    {
-        mov eax, operand; //eax = v;
-       mov ebx, incr; // ebx = i;
-        mov ecx, 0x0; // ecx = 0;
-        lock xadd dword ptr [eax], ecx; 
-       lock xadd dword ptr [eax], ebx; 
-        mov result, ecx; // result = ebx;        
-     }
-     return result;    
+    static_assert (sizeof(int32_t) == sizeof(LONG), 
+        "int32_t and LONG size mismatch");
+    return (int32_t)(InterlockedAdd(
+        (volatile LONG*)(operand),
+        (LONG)(incr)
+        ));
 #endif
 }
 
