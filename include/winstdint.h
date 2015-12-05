@@ -33,6 +33,12 @@
 #error "Use this header only with Microsoft Visual C++ compilers!"
 #endif // _MSC_VER ]
 
+# if 1 // we now have stdint.h on windows
+
+# include <stdint.h>
+
+# else
+
 #ifndef _MSC_STDINT_H_ // [
 #define _MSC_STDINT_H_
 
@@ -245,3 +251,5 @@ typedef uint64_t  uintmax_t;
 
 
 #endif // _MSC_STDINT_H_ ]
+
+# endif
