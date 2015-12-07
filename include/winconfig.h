@@ -176,7 +176,7 @@
 #define localtime_r(a,b) localtime_s(b,a)
 #define get_errno() errno=GetLastError()
 #define random rand
-#define snprintf _snprintf
+#define snprintf_z _snprintf
 
 #define ACL ZKACL  // Conflict with windows API
 
