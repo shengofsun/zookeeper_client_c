@@ -97,7 +97,7 @@ int doCreateNodes(const char* root, int count){
     int i;
     for(i=0; i<count;i++){
         int rc = 0;
-        snprintf(nodeName, sizeof(nodeName),"%s/%d",root,i);
+        snprintf_z(nodeName, sizeof(nodeName),"%s/%d",root,i);
         incCounter(1);
         rc=zoo_acreate(zh, nodeName, "first", 5, &ZOO_OPEN_ACL_UNSAFE, 0,
                             create_completion, 0);
@@ -127,7 +127,7 @@ int doWrites(const char* root, int count){
     counter=0;
     for(i=0; i<count;i++){
         int rc = 0;
-        snprintf(nodeName, sizeof(nodeName),"%s/%d",root,i);
+        snprintf_z(nodeName, sizeof(nodeName),"%s/%d",root,i);
         incCounter(1);
         rc=zoo_aset(zh, nodeName, "second", 6,-1,write_completion, 0);
         if(rc!=ZOK) return rc;        
@@ -156,7 +156,7 @@ int doReads(const char* root, int count){
     counter=0;
     for(i=0; i<count;i++){
         int rc = 0;
-        snprintf(nodeName, sizeof(nodeName),"%s/%d",root,i);
+        snprintf_z(nodeName, sizeof(nodeName),"%s/%d",root,i);
         incCounter(1);
         rc=zoo_aget(zh, nodeName,0,read_completion, 0);
         if(rc!=ZOK) return rc;        
@@ -174,7 +174,7 @@ int doDeletes(const char* root, int count){
     counter=0;
     for(i=0; i<count;i++){
         int rc = 0;
-        snprintf(nodeName, sizeof(nodeName),"%s/%d",root,i);
+        snprintf_z(nodeName, sizeof(nodeName),"%s/%d",root,i);
         incCounter(1);
         rc=zoo_adelete(zh, nodeName,-1,delete_completion, 0);
         if(rc!=ZOK) return rc;        
@@ -208,7 +208,7 @@ int recursiveDelete(const char* root){
         for(i=0;i<children.count; i++){
             int rc = 0;
             char nodeName[2048];
-            snprintf(nodeName, sizeof(nodeName),"%s/%s",root,children.data[i]);
+            snprintf_z(nodeName, sizeof(nodeName),"%s/%s",root,children.data[i]);
             rc=recursiveDelete(nodeName);
             if(rc!=ZOK){
                 free_String_vector(&children);

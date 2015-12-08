@@ -114,7 +114,7 @@ static const char* time_now(char* now_str){
                           "%Y-%m-%d %H:%M:%S",
                           &lt);
 
-    len += snprintf(now_str + len,
+    len += snprintf_z(now_str + len,
                     TIME_NOW_BUF_SIZE - len,
                     ",%03d",
                     (int)(tv.tv_usec/1000));
