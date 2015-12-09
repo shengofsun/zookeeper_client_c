@@ -23,6 +23,7 @@
 #include "zookeeper_log.h"
 #ifndef WIN32
 #include <unistd.h>
+#include "config.h"
 #endif
 
 #include <stdarg.h>
