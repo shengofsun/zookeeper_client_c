@@ -20,6 +20,7 @@
 #include "zookeeper_log.h"
 #include <errno.h>
 #ifndef WIN32
+#include "config.h"
 #ifdef THREADED 
 #include <pthread.h>
 #endif
